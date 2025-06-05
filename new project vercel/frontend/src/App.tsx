@@ -16,7 +16,6 @@ function App() {
     error?: string;
   } | null>(null);
 
-  // This will be passed to FileUpload component
   const handleProcessingComplete = (results: {
     success: boolean;
     message: string;
@@ -40,7 +39,7 @@ function App() {
             <FileUpload 
               onProcessingStart={() => setIsProcessing(true)}
               onProcessingComplete={handleProcessingComplete}
-              apiUrl={import.meta.env.VITE_API_URL}  // 👈 Use this to pass backend URL
+              apiUrl={import.meta.env.VITE_BACKEND_URL}
             />
           )}
 
