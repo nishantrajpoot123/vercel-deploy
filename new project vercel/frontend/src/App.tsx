@@ -16,6 +16,7 @@ function App() {
     error?: string;
   } | null>(null);
 
+  // This will be passed to FileUpload component
   const handleProcessingComplete = (results: {
     success: boolean;
     message: string;
@@ -30,20 +31,21 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
-      
+
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <Instructions />
-          
+
           {!processingResults?.success && (
             <FileUpload 
               onProcessingStart={() => setIsProcessing(true)}
               onProcessingComplete={handleProcessingComplete}
+              apiUrl={import.meta.env.VITE_API_URL}  // 👈 Use this to pass backend URL
             />
           )}
-          
+
           {isProcessing && <ProcessingStatus />}
-          
+
           {processingResults?.success && processingResults.outputFile && (
             <DownloadSection 
               filename={processingResults.outputFile}
@@ -53,7 +55,7 @@ function App() {
           )}
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );
