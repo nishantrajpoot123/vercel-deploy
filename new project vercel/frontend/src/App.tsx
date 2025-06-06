@@ -39,7 +39,7 @@ function App() {
             <FileUpload 
               onProcessingStart={() => setIsProcessing(true)}
               onProcessingComplete={handleProcessingComplete}
-              apiUrl={import.meta.env.VITE_BACKEND_URL}
+              
             />
           )}
 
