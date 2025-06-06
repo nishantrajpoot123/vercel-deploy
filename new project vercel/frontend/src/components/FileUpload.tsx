@@ -92,7 +92,8 @@ const FileUpload: React.FC<FileUploadProps> = ({ onProcessingStart, onProcessing
         },
       };
 
-      const response = await axios.post('/api/upload', formData, config);
+      const API_BASE_URL = import.meta.env.VITE_API_URL;
+      const response = await axios.post(`${API_BASE_URL}/upload`, formData, config);
       
       const data = response.data as {
         message: string;
