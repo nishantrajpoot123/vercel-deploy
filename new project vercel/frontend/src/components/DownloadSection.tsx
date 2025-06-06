@@ -8,7 +8,9 @@ interface DownloadSectionProps {
 }
 
 const DownloadSection: React.FC<DownloadSectionProps> = ({ filename, sessionId, message }) => {
-  const downloadUrl = `/api/download/${sessionId}/${filename}`;
+
+  const backendBaseUrl = "https://render-backen-3.onrender.com"; \
+  const downloadUrl = `${backendBaseUrl}/api/download/${sessionId}/${filename}`;
   
   const handleDownload = () => {
     window.location.href = downloadUrl;
