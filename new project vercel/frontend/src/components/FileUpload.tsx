@@ -106,7 +106,25 @@ const FileUpload: React.FC<FileUploadProps> = ({ onProcessingStart, onProcessing
         message: data.message,
         outputFile: data.outputFile,
         sessionId: data.sessionId,
+        
       });
+      if (data.outputFile) {
+        const downloadUrl = `${API_BASE_URL}/api/download/${data.outputFile}`;
+        const downloadResponse = await axios.get(downloadUrl, {
+          responseType: 'blob',
+        });
+
+        const blob = new Blob([downloadResponse.data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', data.outputFile);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);
+      }
+
     } catch (err) {
       let errorMessage = 'An error occurred during processing';
       if (axios.isAxiosError(err)) {
